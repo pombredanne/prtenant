@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "PRtenant",
+  "version": "0.9",
+  "author": "Mark R. Gollnick &#10013; <mark.r.gollnick@gmail.com>",
+  "description": "Pull-request and code-review templater for git services.",
+
+  "icons": { "128": "images/icon_128.png", "64": "images/icon_64.png" },
+  "homepage_url": "https://github.com/markgollnick/prtenant",
+  "update_url": "https://dl.dropboxusercontent.com/u/96026820/prtenant/manifest.xml",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/*/compare/*"
+      ],
+      "js": [
+        "scripts/jquery-1.10.2.min.js",
+        "scripts/prtenant.js"
+      ]
+    }
+  ]
+}
