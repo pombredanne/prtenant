@@ -1,0 +1,90 @@
+html,body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+body {
+  background: #fff url(/images/watermark.gif) no-repeat bottom right fixed;
+}
+
+iframe,img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+h1 {
+  font-style: italic;
+}
+
+h2,h3,h4,h5,h6 {
+  text-decoration: underline;
+}
+
+div.container {
+  padding-top: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  max-width: 768px;
+
+  font-family: "Lucida Sans", "Helvetica", "Verdana", "Arial" sans-serif;
+  font-size: 11pt;
+}
+
+div.notice {
+  text-align: center;
+  min-height: 1.5em;
+}
+
+div.note {
+  background-color: #cfc;
+  border: 1px solid #8b8;
+
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  -ms-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
+  border-radius: 0.25em;
+
+  color: #363;
+  display: none;
+}
+
+div.save_restore {
+  float: left;
+  width: 128px;
+}
+
+div.edit_settings {
+  float: right;
+  width: 640px;
+}
+
+a {
+  color: #333;
+  border: 0;
+  font-family: "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+               "Consolas", "Courier New", monospace;
+  font-size: 10pt;
+  text-decoration: none;
+}
+
+input,textarea {
+  width: 512px;
+}
+
+input {
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+textarea {
+  font-size: 11pt;
+  font-family: "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+               "Consolas", "Courier New", monospace;
+  height: 280px;
+}

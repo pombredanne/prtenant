@@ -9,6 +9,7 @@
   "icons": { "128": "images/icon_128.png", "64": "images/icon_64.png" },
   "homepage_url": "https://github.com/markgollnick/prtenant",
   "update_url": "https://dl.dropboxusercontent.com/u/96026820/prtenant/manifest.xml",
+  "options_page": "html/options.html",
 
   "content_scripts": [
     {
@@ -20,5 +21,9 @@
         "scripts/prtenant.js"
       ]
     }
-  ]
+  ],
+
+  "background": {
+    "scripts": ["scripts/background.js"]
+  }
 }
