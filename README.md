@@ -1,10 +1,12 @@
-PRtenant
-========
+﻿![Empire State Building Construction](http://content.screencast.com/users/markgollnick/folders/Jing/media/863edc66-7f0d-4379-8cb2-0c68fbc865a0/prtenant.jpg)
 
-PRtenant *lives* in your pull requests, and is *pertinent* to *getting things
-done*.
+PRtenant lives in your pull requests, and is *pertinent* to getting things
+done.
 
 It is a pull-request and code-review templater for git services and hosts.
+
+Currently, it only supports GitHub. But there is no reason that that cannot
+change.
 
 
 Rationale
