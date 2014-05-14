@@ -3,8 +3,8 @@
 function prtenant(settings) {
     "use strict";
 
-    var $prt = $('#pull_request_title'),
-        $prb = $('#pull_request_body'),
+    var $prt = $('input[id^="pull_request_title"]'),
+        $prb = $('textarea[id^="pull_request_body"]'),
         $msgs = $('a.message'),
         title = settings.prt_title;
 

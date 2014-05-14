@@ -26,5 +26,9 @@
 
   "background": {
     "scripts": ["scripts/background.js"]
-  }
+  },
+
+  "web_accessible_resources": [
+    "scripts/jquery-1.10.2.min.map"
+  ]
 }
