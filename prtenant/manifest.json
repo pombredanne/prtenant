@@ -14,7 +14,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/*/*/compare/*"
+        "https://github.com/*/*/compare/*",
+        "https://github.com/*/*/pull/*"
       ],
       "js": [
         "scripts/jquery-1.10.2.min.js",

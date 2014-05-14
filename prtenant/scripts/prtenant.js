@@ -1,12 +1,14 @@
-function PRtenant(settings) {
+/*global $, chrome */
 
-    var $prt = $('#pull_request_title');
-    var $prb = $('#pull_request_body');
-    var $msgs = $('a.message');
+function prtenant(settings) {
+    "use strict";
 
-    var title = settings['prt_title'];
+    var $prt = $('#pull_request_title'),
+        $prb = $('#pull_request_body'),
+        $msgs = $('a.message'),
+        title = settings.prt_title;
 
-    switch (settings['prt_title_mode']) {
+    switch (settings.prt_title_mode) {
 
     case '2':
         if ($msgs && $msgs.length > 0) {
@@ -21,17 +23,19 @@ function PRtenant(settings) {
         break;
 
     case '0':
+        /* fall through */
     default:
         break;
 
     }
 
     $prt.val(title);
-    $prb.val(settings['prt_body']);
+    $prb.val(settings.prt_body);
 
-};
+}
 
-chrome.runtime.sendMessage({method: 'getLocalStorage'}, function(response) {
-    result = JSON.parse(response);
-    PRtenant(result);
+chrome.runtime.sendMessage({method: 'getLocalStorage'}, function (response) {
+    "use strict";
+    var result = JSON.parse(response);
+    prtenant(result);
 });
