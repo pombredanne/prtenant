@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "PRtenant",
-  "version": "1.0",
+  "version": "1.1",
   "author": "Mark R. Gollnick &#10013; <mark.r.gollnick@gmail.com>",
   "description": "Pull-request and code-review templater for git services.",
 
