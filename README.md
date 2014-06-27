@@ -44,7 +44,7 @@ Testing
 
 PRtenant is WOMM Certified™:
 
-![WOMM Certified™](http://content.screencast.com/users/markgollnick/folders/Jing/media/19ea7b38-4a94-450c-9190-3e5115ebe1c4/womm.png)
+[![WOMM Certified™](http://content.screencast.com/users/markgollnick/folders/Jing/media/19ea7b38-4a94-450c-9190-3e5115ebe1c4/womm.png)](http://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
 
 
 License

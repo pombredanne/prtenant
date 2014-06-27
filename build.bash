@@ -1,34 +1,76 @@
 #!/bin/bash
 
-# Initialization
-argc=($#)
-argv=($@)
-arg0=${0#./} # Ensure no dot prefix
-this=${0##*/} # Name of executing script
-wdir=$([[ $0 == /* ]] && echo "${arg0%$this}" || echo "${PWD}/${arg0%$this}")
-wdir=${wdir%/} # Ensure no trailing slash
-pdir=${wdir%/*}
-
-# Project variables
-project=${wdir##*/}
-version=$(awk '{
-    split($0, a, " -- ");
-    version=a[1];
-} END {
-    print version;
-}' CHANGES.txt)
-author=$(git log -1 --format="%an <%ae>" | sed 's/Mark.*Gollnick/& \&#10013;/')
-
-# Options
-target=${argv[0]}
-tag=${argv[1]}
+# Try to determine the location of the currently executing script
+ARG0=${0#./}
+THIS=${0##*/}
+WDIR=$([[ $0 == /* ]] && echo "${ARG0%$THIS}" || echo "$PWD/${ARG0%$THIS}")
+WDIR=${WDIR%/}
+PDIR=${WDIR%/*}
 
 
-print_usage() {
+# Project information
+PROJECT=${WDIR##*/}
+VERSION=$(
+    awk '{
+        split($0, a, " -- ");
+        version=a[1];
+    } END {
+        print version;
+    }' CHANGES.txt)
+AUTHOR=$(
+    git log -1 --format="%an <%ae>" |
+    sed 's/Mark.*Gollnick/& \&#10013;/')
+
+
+# Script entry point
+__build_main() {
+    IFS=$'\n'
+    argc=($#)
+    argv=($@)
+
+    # User input
+    target=${argv[0]}
+    tag=${argv[1]}
+
+    # Custom Build
+    if [ "$target" == "crx" ]; then
+        __build_prep_work
+        chrome --pack-extension="$WDIR/$PROJECT"
+        __build_post_work "custom"
+
+    # Official Build
+    elif [ "$target" == "official" ]; then
+        __build_prep_work
+        chrome --pack-extension="$WDIR/$PROJECT" --pack-extension-key="$PDIR/$PROJECT.pem"
+        __build_post_work "$tag"
+
+    # Debug Build
+    elif [ "$target" == "debug" ]; then
+        __build_prep_work
+        openssl genrsa -out "$PROJECT.pem" 1024
+        ./crxmake.bash "$PROJECT" "$PROJECT.pem"
+        __build_rm_files "*pem"
+        __build_post_work "debug"
+
+    # Clean
+    elif [ "$target" == "clean" ]; then
+        __build_rm_files "*crx"
+        rm -rf build
+        __build_post_work
+
+    # Print Usage
+    else
+        __build_usage
+
+    fi
+}
+
+
+__build_usage() {
     echo "
-$project
-$version
-$author
+$PROJECT
+$VERSION
+$AUTHOR
 
 Usage:
     $this crx
@@ -45,61 +87,31 @@ Usage:
 }
 
 
-rm_files() {
-    find . -path ./.git/ -prune -o -iwholename "$1" -exec rm \{\} \;
-}
-
-
-prepare_build() {
-    rm_files "*pem"
-    rm_files "*.DS_Store"
-    rm_files "*/._*"
+__build_prep_work() {
+    __build_rm_files "*pem"
+    __build_rm_files "*.DS_Store"
+    __build_rm_files "*/._*"
     if [ ! -e build ]; then mkdir build; fi
-    for fileName in `find . -maxdepth 1 | egrep "\.(txt|md)$"`; do
-        cp "$fileName" "$wdir/$project/"
+    for fileName in $(find . -maxdepth 1 | egrep "\.(txt|md)$"); do
+        cp "$fileName" "$WDIR/$PROJECT/"
     done
 }
 
 
-post_build() {
+__build_post_work() {
     tag="-$1" || "";
     if [ -e build ]; then
-        mv "$wdir/$project.crx" "$wdir/build/$project$tag.crx"
+        mv "$WDIR/$PROJECT.crx" "$WDIR/build/$PROJECT$tag.crx"
     fi
-    for fileName in `find . -maxdepth 1 | egrep "\.(txt|md)$"`; do
-        rm -f "$wdir/$project/$fileName"
+    for fileName in $(find . -maxdepth 1 | egrep "\.(txt|md)$"); do
+        rm -f "$WDIR/$PROJECT/$fileName"
     done
 }
 
 
-# Custom Build
-if [ "$target" == "crx" ]; then
-    prepare_build
-    chrome --pack-extension="$wdir/$project"
-    post_build "custom"
+__build_rm_files() {
+    find . -path ./.git/ -prune -o -iwholename "$1" -print -exec rm \{\} \;
+}
 
-# Official Build
-elif [ "$target" == "official" ]; then
-    prepare_build
-    chrome --pack-extension="$wdir/$project" --pack-extension-key="$pdir/$project.pem"
-    post_build "$tag"
 
-# Debug Build
-elif [ "$target" == "debug" ]; then
-    prepare_build
-    openssl genrsa -out "$project.pem" 1024
-    ./crxmake.bash "$project" "$project.pem"
-    rm_files "*pem"
-    post_build "debug"
-
-# Clean
-elif [ "$target" == "clean" ]; then
-    rm_files "*crx"
-    rm -rf build
-    post_build
-
-# Print Usage
-else
-    print_usage
-
-fi
+__build_main $*

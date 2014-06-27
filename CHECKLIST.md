@@ -4,8 +4,8 @@ PRtenant
 Build Checklist
 ---------------
 
-1. Update the manifests (JSON, XML)
-2. Update the documents (CHANGES, README)
-3. Build the new version
-4. Deploy the new CRX and the XML manifest to the server
+1. Update CHANGES.txt
+2. Update the README
+3. Update the manifests (JSON and XML)
+4. Build and deploy the new version
 5. Update GitHub
