@@ -2,9 +2,9 @@ function cleanRegex(regex) {
     'use strict';
     return (
         '^' + regex
-        .replace('^', '')
+        .replace('^', '').replace('/', '')
         .split('').reverse().join('')
-        .replace('$', '')
+        .replace('$', '').replace('/', '')
         .split('').reverse().join('') + '$'
     );
 }

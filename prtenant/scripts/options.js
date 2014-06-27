@@ -35,7 +35,7 @@ function prt_options() {
         } else {
             $prt.prop('disabled', false);
             if (mode.indexOf('regex') !== -1) {
-                $prt.val('^[A-Z]+-[0-9]+:[[:space:]]+.*$');
+                $prt.val(/^[\w\-]+:[ \t]+.*$/);
             }
             $prt.change(); /* trigger change event */
         }
