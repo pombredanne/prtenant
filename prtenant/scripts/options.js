@@ -35,7 +35,7 @@ function prt_options() {
         } else {
             $prt.prop('disabled', false);
             if (mode.indexOf('regex') !== -1) {
-                $prt.val(/^[\w\-]+:[ \t]+.*$/);
+                $prt.val(/^[\w\-]+:[ \t]*.*$/);
             }
             $prt.change(); /* trigger change event */
         }
