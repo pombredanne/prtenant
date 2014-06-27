@@ -20,7 +20,7 @@ fields according to a format YOU specify to make your life easier.
 Installation
 ------------
 
-[![ADD TO CHROME](http://content.screencast.com/users/markgollnick/folders/Jing/media/05094cc4-dd4e-4210-99d8-4db072371388/add_to_chrome.png)](https://dl.dropboxusercontent.com/u/96026820/prtenant/prtenant-1.1.crx)
+[![ADD TO CHROME](http://content.screencast.com/users/markgollnick/folders/Jing/media/05094cc4-dd4e-4210-99d8-4db072371388/add_to_chrome.png)](https://dl.dropboxusercontent.com/u/96026820/prtenant/prtenant-1.2.crx)
 
 1. Right-click, Save as…
 2. Go to [chrome://extensions](chrome://extensions)
