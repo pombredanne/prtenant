@@ -73,15 +73,15 @@ $VERSION
 $AUTHOR
 
 Usage:
-    $this crx
+    $THIS crx
         Build a custom version of the CRX.
-    $this debug
+    $THIS debug
         Build a debug version of the CRX with crxmake.sh
         (useful if you don't have chrome; requires
          a posix system or a good MinGW install)
-    $this official [version]
+    $THIS official [version]
         Release a new official binary (primary dev only ;-)
-    $this clean
+    $THIS clean
         Clean up!
 "
 }
