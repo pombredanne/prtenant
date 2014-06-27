@@ -101,6 +101,7 @@ __build_prep_work() {
 __build_post_work() {
     tag="-$1" || "";
     if [ -e build ]; then
+        echo "$WDIR/$PROJECT.crx -> $WDIR/build/$PROJECT$tag.crx"
         mv "$WDIR/$PROJECT.crx" "$WDIR/build/$PROJECT$tag.crx"
     fi
     for fileName in $(find . -maxdepth 1 | egrep "\.(txt|md)$"); do
