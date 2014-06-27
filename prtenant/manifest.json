@@ -19,6 +19,7 @@
       ],
       "js": [
         "scripts/jquery-1.10.2.min.js",
+        "scripts/utilities.js",
         "scripts/prtenant.js"
       ]
     }

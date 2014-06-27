@@ -17,11 +17,12 @@
         <div class="edit_settings">
             <p>The PR’s default title <a href="https://www.ietf.org/rfc/rfc2119.txt" target="_blank">SHALL</a> be
             <select id="title_option">
-                <option>a customized default</option>
-                <option>the first commit’s</option>
-                <option>the last commit’s</option>
+                <option>a customized default message:</option> <!-- 0 -->
+                <option>the first commit’s message.</option> <!-- 1 -->
+                <option>the last commit’s message.</option> <!-- 2 -->
+                <option>the first commit’s message matching regex:</option> <!-- 3 -->
+                <option>the last commit’s message matching regex:</option> <!-- 4 -->
             </select>
-            message.
 
             <input type="text" id="pr_title" value="Title" />
             </p>
@@ -38,6 +39,7 @@
     </div>
 
     <script type="text/javascript" src="/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/scripts/utilities.js"></script>
     <script type="text/javascript" src="/scripts/options.js"></script>
 </body>
 </html>

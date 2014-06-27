@@ -1,4 +1,4 @@
-/*global $ */
+/*global $, cleanRegex */
 
 function prt_options() {
     "use strict";
@@ -30,10 +30,14 @@ function prt_options() {
             mode = $prtm.val();
         }
 
-        if ('a customized default' !== mode) {
+        if (mode.indexOf('message.') !== -1) {
             $prt.prop('disabled', true);
         } else {
             $prt.prop('disabled', false);
+            if (mode.indexOf('regex') !== -1) {
+                $prt.val('^[A-Z]+-[0-9]+:[[:space:]]+.*$');
+            }
+            $prt.change(); /* trigger change event */
         }
     }
 
@@ -47,7 +51,8 @@ function prt_options() {
         if (0 >= localStorage.length) {
             init_local_storage();
         }
-        localStorage.prt_title_mode = $prtm.prop('selectedIndex');
+
+        localStorage.prt_title_mode = String($prtm.prop('selectedIndex'));
         localStorage.prt_title = $prt.val();
         localStorage.prt_body = $prb.val();
         notify('Settings saved');
@@ -75,6 +80,13 @@ function prt_options() {
     $prtm.change(function (e) {
         var selection = $(this).val();
         change_title_mode(selection);
+    });
+    $prt.change(function (e) {
+        var mode = $prtm.val();
+        if (mode.indexOf('regex') === -1) {
+            return;
+        }
+        $(this).val(cleanRegex($(this).val()));
     });
 
     restore_options();
